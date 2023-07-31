@@ -94,21 +94,29 @@ class _LoginState extends State<Login> {
                   width: double.infinity,
                   height: 57,
                   child: ElevatedButton(
+                    
                     onPressed: () async {
+
                       try {
                         if (_key.currentState!.validate()) {
-                          AuthService().emailLogin(_emailController.text,
-                              _passwordController.text, context);
-                          // ignore: use_build_context_synchronously
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const HomeScreen()));
+                          await AuthService().emailLogin(_emailController.text,
+                              _passwordController.text, context).then((value) {
+                                Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const HomeScreen()));
+                                });
+                          
                         }
                       } on FirebaseAuthException catch (e) {
+                        
                         var snackBar =
                             SnackBar(content: Text(e.message.toString()));
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Login()));
                       }
                     },
                     child: Text(

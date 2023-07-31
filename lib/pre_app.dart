@@ -15,8 +15,9 @@ class PreApp extends StatelessWidget {
       stream: FirebaseAuth.instance.authStateChanges(), // when user changes builder will run again
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          log("connection state is waiting");
-          return const Center(child: Text('Loading'));
+          return const Center(
+                  child: CircularProgressIndicator(),
+                );
         } else if (snapshot.hasError) {
           log(snapshot.error.toString());
           return  Center(child: Text(snapshot.error.toString()));

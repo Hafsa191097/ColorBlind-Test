@@ -64,6 +64,10 @@ class Register_Screen extends StatelessWidget {
                       var snackBar =
                           SnackBar(content: Text(e.message.toString()));
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Register_Screen()));
                     }
                   },
                   child: Text(

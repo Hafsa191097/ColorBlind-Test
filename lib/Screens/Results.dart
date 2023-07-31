@@ -17,8 +17,41 @@ class Results extends StatefulWidget {
 }
 
 class _ResultsState extends State<Results> {
+    late double percentage;
+
+  @override
+  void initState() {
+    super.initState();
+    calculatePercentage();
+  }
+
+  void calculatePercentage() {
+    if (widget.total > 0) {
+      percentage = (widget.correct / widget.total) * 100;
+    } else {
+      percentage = 0.0;
+    }
+  }
+
+    @override
+  void didUpdateWidget(covariant Results oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.total != widget.total || oldWidget.correct != widget.correct) {
+      calculatePercentage();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    String imagePath = 'images/doctor1.jpg'; 
+
+    if (percentage < 40) {
+      imagePath = 'images/doctor1.jpg';
+    } else if (percentage >= 41 && percentage <= 80) {
+      imagePath = 'images/doctor2.jpg';
+    } else if (percentage > 80) {
+      imagePath = 'images/doctor3.jpg';
+    }
     return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -29,10 +62,12 @@ class _ResultsState extends State<Results> {
               mainAxisAlignment:MainAxisAlignment.center,
               crossAxisAlignment:CrossAxisAlignment.center,
               children: [
+                Image.asset(imagePath),
+                SizedBox(height:30),
                 Text("${widget.correct} / ${widget.total}"),
                 const SizedBox(height: 10),
                 Text(
-                  " You Have ${widget.correct} correctly done and ${widget.incorrect} incorrectlt done!"
+                  " You Have ${widget.correct} correctly done and ${widget.incorrect} incorrectly done!"
                 ),
                 const SizedBox(height:50),
                  SizedBox(

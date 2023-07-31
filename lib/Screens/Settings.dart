@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../Auth/auth.dart';
+import 'Login_Signup/Login.dart';
 
 class Settings extends StatelessWidget {
   const Settings({super.key});
@@ -8,17 +9,19 @@ class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       body: Center(
         child: FloatingActionButton(
-          onPressed: (){
+          onPressed: () {
             AuthService().signOut();
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => const Login()));
           },
-          child: Icon(Icons.logout_rounded, color: Colors.white, size: 20),
+          child:
+               Icon(Icons.logout_rounded, color: Colors.white, size: 20),
           backgroundColor: Colors.redAccent,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(50))),
-          ),
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(50))),
+        ),
       ),
     );
   }
