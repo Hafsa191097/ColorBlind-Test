@@ -2,15 +2,18 @@ import 'dart:async';
 import 'package:color_blind_test/pre_app.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter/material.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding binding=WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: binding);
+  
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  
   runApp(const MyApp());
+  FlutterNativeSplash.remove();
 }
 
 class MyApp extends StatelessWidget {
@@ -25,55 +28,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromRGBO(239, 83, 80, 1)),
         useMaterial3: true,
       ),
-      home: const SplashScreen(),
+      home: const PreApp(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
-
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
-  @override
-  // ignore: library_private_types_in_public_api
-  _SplashScreenState createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    Timer(const Duration(seconds: 5), () {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) =>const PreApp()), 
-      );
-    });
-  }
-
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                child: Image.asset('images/logo.PNG'),
-              ),
-               RichText(
-                text:const TextSpan(
-                  style: TextStyle(fontSize:25),
-                  children: <TextSpan>[
-                    TextSpan(text: 'ColorBlind', style: TextStyle(fontWeight: FontWeight.w400,color:Colors.black)),
-                    TextSpan(text: 'Test', style: TextStyle(fontWeight: FontWeight.bold,color:Colors.redAccent)),
-                  
-                  ],
-                ),
-              ),
-            ],
-          ), 
-        ),
-    );
-  }
-}
