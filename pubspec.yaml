@@ -33,13 +33,12 @@ dev_dependencies:
 flutter_native_splash:
   android: true
   ios: true 
-  background_image: "images/background.jpeg"
+  background_image: 'images/background.jpeg'
   
 flutter:
 
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
   assets:
     - images/
   #   - images/a_dot_ham.jpeg

@@ -216,14 +216,40 @@ class _QuizPLayTileState extends State<QuizPLayTile> {
           height: 20,
         ),
         if (widget.modelClass.image != null)
-          CircleAvatar(
-            radius: (80),
-            backgroundColor: Colors.white,
-            child: Image.network(
-              widget.modelClass.image!,
-              fit: BoxFit.fill,
-            ),
-          ),
+           ConstrainedBox(
+                      constraints: const BoxConstraints(
+                        minWidth: 44,
+                        minHeight: 44,
+                        maxWidth:  150,
+                        maxHeight: 150,
+                      ),
+                      child: Container(
+                      width: 155,
+                      height:155,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 1,
+                          color: Colors.black,
+                        ),
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(96),
+                        child: Image.network(
+                          widget.modelClass.image!,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                        ),
+           ),
+          // CircleAvatar(
+          //   radius: (80),
+          //   backgroundColor: Colors.white,
+          //   child: Image.network(
+          //     widget.modelClass.image!,
+          //     fit: BoxFit.fill,
+          //   ),
+          // ),
 
         const SizedBox(
           height: 15,

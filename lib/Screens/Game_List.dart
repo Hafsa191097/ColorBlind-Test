@@ -63,11 +63,28 @@ class _GamesState extends State<Games> {
                       constraints: const BoxConstraints(
                         minWidth: 44,
                         minHeight: 44,
-                        maxWidth: 64,
-                        maxHeight: 64,
+                        maxWidth: 58,
+                        maxHeight: 100,
                       ),
-                      child: Image.network(data['ImageUrl'], fit: BoxFit.cover),
-                    ),
+                      child: Container(
+                      width: 130,
+                      height:155,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 1,
+                          color: Colors.black,
+                        ),
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(96),
+                        child: Image.network(
+                          data['ImageUrl'],
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                        ),
+                      ),
                     trailing: IconButton(
                       onPressed: (){
                         Navigator.push(context, MaterialPageRoute(builder: (context) => ActualQuiz(data['documentId'])));
