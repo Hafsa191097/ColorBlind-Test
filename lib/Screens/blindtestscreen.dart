@@ -113,8 +113,10 @@ class _ActualQuizState extends State<ActualQuiz> {
                 child: CircularProgressIndicator(),
               ),
             ),
+          const SizedBox(height: 25),
         ],
       ),
+      
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.check, color: Colors.white, size: 25),
         backgroundColor: Colors.redAccent,
